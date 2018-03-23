@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Commande implements Serializable {
@@ -14,6 +16,7 @@ public class Commande implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long numCommande;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date DateCommande;
 	
 	public Commande() {
