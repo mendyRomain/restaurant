@@ -1,11 +1,15 @@
 package com.connectRestaurant.restaurant.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Ingredient implements Serializable{
@@ -15,6 +19,14 @@ public class Ingredient implements Serializable{
 	private Long idIngredient;
 	private String nomIngredient;
 	private boolean alrgene;
+	
+	@ManyToMany(mappedBy="ingredients")
+	private Collection<Produit> produits;
+	
+	@ManyToOne
+	@JoinColumn(name="code_supplement")
+	private Supplement supplement;
+	
 	
 	public Ingredient() {
 		super();

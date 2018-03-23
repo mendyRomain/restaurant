@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @DiscriminatorValue("Plat")
@@ -13,6 +15,18 @@ public class Plat extends Produit{
 	private String typePlat;
 	private boolean redMeat;
 	
+	@ManyToOne
+	@JoinColumn(name="Code_Cuisson")
+	private Cuisson cuisson;
+	
+	public Cuisson getCuisson() {
+		return cuisson;
+	}
+
+	public void setCuisson(Cuisson cuisson) {
+		this.cuisson = cuisson;
+	}
+
 	public Plat() {
 		super();
 	}

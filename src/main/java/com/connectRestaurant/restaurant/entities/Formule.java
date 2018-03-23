@@ -1,11 +1,16 @@
 package com.connectRestaurant.restaurant.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Formule implements Serializable{
@@ -15,6 +20,18 @@ public class Formule implements Serializable{
 	private Long idFormule;
 	private String nomFormule;
 	private String typeFormule;
+	private float prix;
+	
+	//association
+	@ManyToMany(mappedBy="formules")
+	private Collection<Produit> produits;
+	
+	@OneToMany(mappedBy="formules")
+	private Collection<LigneDeCommande> ligneDeCommandes;
+	
+	@ManyToOne
+	@JoinColumn(name="code_tva")
+	private Tva tva;
 	
 	public Formule() {
 		super();

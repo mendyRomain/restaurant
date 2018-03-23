@@ -1,12 +1,14 @@
 package com.connectRestaurant.restaurant.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -21,11 +23,29 @@ public class Tva implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateTVA;
 	
+	@OneToMany(mappedBy="tva")
+	private Collection<Produit> produits;
+	
+	@OneToMany(mappedBy="tva")
+	private Collection<Formule> formules;
+	
 	public Tva() {
 		super();
 	}
 
 	
+
+	public Collection<Produit> getProduits() {
+		return produits;
+	}
+
+
+
+	public void setProduits(Collection<Produit> produits) {
+		this.produits = produits;
+	}
+
+
 
 	public Date getDateTVA() {
 		return dateTVA;

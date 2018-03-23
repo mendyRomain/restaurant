@@ -1,11 +1,13 @@
 package com.connectRestaurant.restaurant.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Supplement implements Serializable{
@@ -15,6 +17,12 @@ public class Supplement implements Serializable{
 	private Long idSupl;
 	private float prix;
 	private String typeSupl;
+	
+	@OneToMany(mappedBy="supplement")
+	private Collection<Ingredient> ingredients;
+	
+	@OneToMany(mappedBy="supplement")
+	private Collection<LigneDeCommande> ligneDeCommandes;
 	
 	public Supplement() {
 		super();

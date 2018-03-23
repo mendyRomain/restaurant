@@ -1,12 +1,14 @@
 package com.connectRestaurant.restaurant.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -18,6 +20,9 @@ public class Commande implements Serializable {
 	private Long numCommande;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date DateCommande;
+	
+	@OneToMany(mappedBy="commande")
+	private Collection<LigneDeCommande> ligneDeCommandes;
 	
 	public Commande() {
 		super();

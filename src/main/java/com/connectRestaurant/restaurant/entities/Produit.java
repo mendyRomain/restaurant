@@ -1,6 +1,7 @@
 package com.connectRestaurant.restaurant.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -10,10 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="TYPE_PRODUIT", discriminatorType=DiscriminatorType.STRING, length=8)
 public abstract class Produit implements Serializable {
 	
 	@Id
@@ -23,7 +27,20 @@ public abstract class Produit implements Serializable {
 	private float prix;
 	private boolean epice;
 	private float quantite;
+	private String urlImage;
 	
+	@ManyToOne
+	@JoinColumn(name="code_tva")
+	private Tva tva;
+	
+	@ManyToMany
+	private Collection<Formule> formules;
+	
+	@OneToMany(mappedBy="produit")
+	private Collection<LigneDeCommande> ligneDeCommandes;
+	
+	@ManyToMany
+	private Collection<Ingredient> ingredients;
 	
 	public Produit() {
 		super();
@@ -37,6 +54,30 @@ public abstract class Produit implements Serializable {
 		this.prix = prix;
 		this.epice = epice;
 		this.quantite = quantite;
+	}
+
+
+
+	public Produit(String nomProduit, float prix, boolean epice, float quantite, String urlImage, Tva tva) {
+		super();
+		this.nomProduit = nomProduit;
+		this.prix = prix;
+		this.epice = epice;
+		this.quantite = quantite;
+		this.urlImage = urlImage;
+		this.tva = tva;
+	}
+
+
+
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+
+
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
 	}
 
 
