@@ -1,9 +1,11 @@
 package com.connectRestaurant.restaurant.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Emplacement implements Serializable{
@@ -11,6 +13,10 @@ public class Emplacement implements Serializable{
 	@Id
 	private Long numEmplacement;	
 	private String commentaireTable;
+	private int nombreDePlace;
+	
+	@ManyToMany(mappedBy="emplacements")
+	private Collection<Commande>commandes;
 	
 	public Emplacement() {
 		super();

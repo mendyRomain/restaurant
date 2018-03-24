@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,6 +26,22 @@ public class Commande implements Serializable {
 	
 	@OneToMany(mappedBy="commande")
 	private Collection<LigneDeCommande> ligneDeCommandes;
+	
+	@ManyToOne
+	@JoinColumn(name="code_statutCommande")
+	private StatutCommande statutCommande;
+	
+	@ManyToMany
+	private Collection<Employe>employes;
+	
+	@ManyToMany
+	private Collection<Emplacement>emplacements;
+	
+	@ManyToMany
+	private Collection<Promotion>promotions;
+	
+	@OneToMany(mappedBy="commande")
+	private Collection<Reglement>reglements;
 	
 	public Commande() {
 		super();

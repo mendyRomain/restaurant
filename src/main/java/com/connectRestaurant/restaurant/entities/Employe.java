@@ -1,12 +1,16 @@
 package com.connectRestaurant.restaurant.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Employe implements Serializable{
@@ -19,6 +23,13 @@ public class Employe implements Serializable{
 	private Date dateEntre;
 	private Date dateSortie;
 	private String numSecu;
+	
+	@ManyToMany(mappedBy="employes")
+	private Collection<Commande> commandes;
+	
+	@ManyToOne
+	@JoinColumn(name="code_statutEmp")
+	private StatutEmp statutEmp;
 	
 	public Employe() {
 		super();

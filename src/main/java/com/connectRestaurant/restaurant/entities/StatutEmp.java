@@ -1,11 +1,13 @@
 package com.connectRestaurant.restaurant.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class StatutEmp implements Serializable{
@@ -16,6 +18,9 @@ public class StatutEmp implements Serializable{
 	private boolean salle;
 	private boolean caisse;
 	private boolean cuisine;
+	
+	@OneToMany(mappedBy="statutEmp")
+	static Collection<Employe>employes;
 	
 	public StatutEmp() {
 		super();

@@ -1,14 +1,16 @@
 package com.connectRestaurant.restaurant.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
-public class promotion implements Serializable{
+public class Promotion implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -17,11 +19,15 @@ public class promotion implements Serializable{
 	private float pourcentageApplicable;
 	private String infoProm;
 	
-	public promotion() {
+	@ManyToMany(mappedBy="promotions")
+	private Collection<Commande>commandes;
+	
+	
+	public Promotion() {
 		super();
 	}
 
-	public promotion(String codePromotion, float pourcentageApplicable, String infoProm) {
+	public Promotion(String codePromotion, float pourcentageApplicable, String infoProm) {
 		super();
 		this.codePromotion = codePromotion;
 		this.pourcentageApplicable = pourcentageApplicable;
