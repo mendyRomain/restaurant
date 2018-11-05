@@ -18,7 +18,26 @@ public class StatutEmp implements Serializable{
 	private boolean salle;
 	private boolean caisse;
 	private boolean cuisine;
+	private boolean empSalle;
+	private boolean backOffice;
+	private String nomStatut;
 	
+	public String getNomStatut() {
+		return nomStatut;
+	}
+
+	public void setNomStatut(String nomStatut) {
+		this.nomStatut = nomStatut;
+	}
+
+	public boolean isBackOffice() {
+		return backOffice;
+	}
+
+	public void setBackOffice(boolean backOffice) {
+		this.backOffice = backOffice;
+	}
+
 	@OneToMany(mappedBy="statutEmp")
 	static Collection<Employe>employes;
 	
@@ -30,7 +49,7 @@ public class StatutEmp implements Serializable{
 		super();
 		this.salle = salle;
 		this.caisse = caisse;
-		this.cuisine = cuisine;
+		this.cuisine = cuisine;  
 	}
 
 	public Long getIdStatutEmp() {
@@ -43,6 +62,14 @@ public class StatutEmp implements Serializable{
 
 	public boolean isSalle() {
 		return salle;
+	}
+
+	public boolean isEmpSalle() {
+		return empSalle;
+	}
+
+	public void setEmpSalle(boolean empSalle) {
+		this.empSalle = empSalle;
 	}
 
 	public void setSalle(boolean salle) {

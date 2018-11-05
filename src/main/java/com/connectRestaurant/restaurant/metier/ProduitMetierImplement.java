@@ -3,10 +3,12 @@ package com.connectRestaurant.restaurant.metier;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.connectRestaurant.restaurant.dao.ProduitRepository;
 import com.connectRestaurant.restaurant.entities.Produit;
 
+@Service
 public class ProduitMetierImplement implements ProduitMetier{
 	
 	@Autowired

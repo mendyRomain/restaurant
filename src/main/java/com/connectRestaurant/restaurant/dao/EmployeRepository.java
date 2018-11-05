@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.connectRestaurant.restaurant.entities.Employe;
 
-public interface EmployeRepository extends JpaRepository<Employe, Long>{
+public interface EmployeRepository extends JpaRepository<Employe, String>{
 
 }
