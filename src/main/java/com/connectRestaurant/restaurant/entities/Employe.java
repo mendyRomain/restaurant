@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,14 +18,35 @@ import javax.persistence.OneToMany;
 public class Employe implements Serializable{
 	
 	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	private long id;
+	
+	@Column(unique=true, nullable=false)
 	private String idEmploye;
+	
+	@Column(nullable=false)
 	private String nomEmploye;
+	
+	@Column(nullable=false)
 	private String prenomEmploye;
+	
+	@Column(nullable=false)
 	private Date dateNaissance;
+	
+	@Column(nullable=false)
 	private Date dateEntre;
+	
+	
 	private Date dateSortie;
+	
+	@Column(nullable=false)
 	private String numSecu;
+	
+	@Column(nullable=false)
 	private String mdp;
+	
+	
+	private boolean suppr;
 	
 	@ManyToMany(mappedBy="employes")
 	private Collection<Commande> commandes;
@@ -140,6 +162,14 @@ public class Employe implements Serializable{
 
 	public void setNumSecu(String numSecu) {
 		this.numSecu = numSecu;
+	}
+
+	public boolean isSuppr() {
+		return suppr;
+	}
+
+	public void setSuppr(boolean suppr) {
+		this.suppr = suppr;
 	}
 	
 	

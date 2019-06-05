@@ -33,7 +33,7 @@ public class ConnectionMetierImplement implements ConnectionMetier {
 		String phrase ="";
 		Validation validation = new Validation();
 		if(connection.getId()!= null) {
-		Optional<Employe> employe = employeRepository.findById(connection.getId());
+		Optional<Employe> employe = employeRepository.findEmployeByIdEmp(connection.getId());
 		
 
 		if (employe.isPresent() == true) {
@@ -43,27 +43,35 @@ public class ConnectionMetierImplement implements ConnectionMetier {
 			StatutEmp statutEmp = statutEmprepository.getStatutjoinemploye(employeValue.getIdEmploye());
 			
 			boolean emploiOk = false;
-			System.out.println("nom interface = "+nomInterface);
-			switch (nomInterface) {
-			case "caisse":
-				emploiOk = statutEmp.isCaisse(); 
-				break;
-			case "client":
-				emploiOk = statutEmp.isSalle();
-				break;
-			case "cuisine":
-				emploiOk = statutEmp.isCuisine();
-				break;
-			case "serveur":
-				emploiOk = statutEmp.isEmpSalle();
-				break;
-			case "backOffice":
-				emploiOk = statutEmp.isBackOffice();
-				break;
-			default:
-				emploiOk = false;
-				break;
+			if(null != statutEmp) {
+				System.out.println("nom interface = "+nomInterface);
+				switch (nomInterface) {
+				case "caisse":
+					emploiOk = statutEmp.isCaisse(); 
+					break;
+				case "client":
+					emploiOk = statutEmp.isSalle();
+					break;
+				case "cuisine":
+					emploiOk = statutEmp.isCuisine();
+					break;
+				case "serveur":
+					emploiOk = statutEmp.isEmpSalle();
+					break;
+				case "backOffice":
+					emploiOk = statutEmp.isBackOffice();
+					break;
+				default:
+					emploiOk = false;
+					break;
+				}
+			}else {
+				phrase ="l'employé n'est pas relié a un droit de connection!!";
+				validation.setOk(false);
+				validation.setPhrase(phrase);
+				return validation; 
 			}
+			
 			System.out.println("résultat après switch = "+emploiOk);
 			System.out.println("mot de passe saisie = "+connection.getMdp());
 			System.out.println("mot de passe base de donnée = "+employeValue.getMdp());
